@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+<body>
+    <div id="front">
+        <h1>
+            Love Quiz
+        </h1>
+        <p>
+            10 questions to test your love!
+        </p>
+        <button onclick="startQuiz()">
+            Start Quiz
+        </button>
+    </div>
+    <div class="footer">
+        <p style="text-align: center; margin-top: 50px;">
+            Made with love
+        </p>
+        <div id="links">
+            <a href="https://www.instagram.com/emily.amara22/" target="_blank" style="margin-right: 20px; text-decoration: none; color: black; font-weight: bold;">Instagram</a>
+            <a href="https://www.tiktok.com/@emily.amara22" target="_blank" style="text-decoration: none; color: black; font-weight: bold;">TikTok</a>
+            <a href="https://www.youtube.com/" target="_blank" style="margin-left: 20px; text-decoration: none; color: black; font-weight: bold;">YouTube</a>
+        </div>
+    </div>
+</body>
+
+<style>
+    html{
+        background: pink;
+        font-family: arial;
+    }
+    #front{
+        background: #ffdddd;
+        color: black;
+        text-align: center;
+        padding: 12px;
+        padding-bottom: 24px;
+        border-radius: 15px;
+        outline: 10px black;
+        max-width: 500px;
+        margin: 100px auto;
+        
+    }
+    button{
+        background: pink;
+        border: none;
+        padding: 9px;
+        border-radius: 7px;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    button:hover{
+        background: rgba(255, 192, 203, 0.747);
+    }
+    .footer{
+        margin-top: 100px;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: #ffdddd;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0%;
+        width: 100vw;
+        max-width: 100vw;
+    }
+    #links a:hover{
+        color: red;
+    }
+    #links a{
+        transition: all 0.3s ease;
+    }
+    #links a:active{
+        color: red;
+    }
+    #links a:visited{
+        color: purple;
+    }
+    #links a:link{
+        color: black;
+    }
+    #links{
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 50px;
+    }
+    
+</style>
+<script>
+    var questions = {
+        1: {
+            question: "What is their favorite color?",
+            options: ["Red", "Pink", "Purple", "Blue"],
+            answer: "Pink",
+            image: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2tjNHNwZXBkd2R4Nm1xNHV4ZDFzbGhrY3ZhaWFhY3R2NG01NHF5MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26ufo4EIIEdB8tX3y/giphy.gif"
+        },
+        2: {
+            question: "What is their love language?",
+            options: ["Words of Affirmation", "Acts of Service", "Receiving Gifts", "Quality Time", "All of the above"],
+            answer: "All of the above",
+            image: "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzBrY2VkYjRycW5zbTgycDZ0MTdxbWVveWhrbHp3Z2xpeXFjNzc1NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/I0jpirkvLPN8VFQiBs/giphy.gif"
+        },
+        3: {
+            question: "What is their ideal date?",
+            options: ["Dinner and a movie", "Picnic in the park", "Beach day", "Stargazing"],
+            answer: "Dinner and a movie",
+            image: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzNtOW9ieXRzeDhsOGJzanp5Y2cxd2lzZ3dkczg3d2J5NHNrdjV5eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9zoAvbwOjQzf2/giphy.gif"
+        },
+        4: {
+            question: "What is their love style?",
+            options: ["Romantic", "Practical", "Adventurous", "Caring"],
+            answer: "Caring",
+            image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdG5xdWwyY3FsM2kxeDZ6bXE4azF0dWdyc242azA5bHVwdzRqN3lyaCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/1JmGiBtqTuehfYxuy9/giphy.gif"
+        },
+        5: {
+            question: "What is their favorite song of these?",
+            options: ["Flightless Bird, American Mouth - Iron & Wine", "I'll Try Anything Once - The Strokes", "Luna - The Smashing Pumpkins", "Sunday - The Cranberries"],
+            answer: "Luna - The Smashing Pumpkins",
+            image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTlidGY1dnR0Nm03ZDE2ZmcyOTZ1MHpmZzAwNmJvbmZjN3NxeWlzOCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/gQJyPqc6E4xoc/giphy.gif"
+        },
+        6: {
+            question: "What is their favorite movie of these?",
+            options: ["The Notebook", "Eternal Sunshine of the Spotless Mind", "500 Days of Summer", "La La Land"],
+            answer: "La La Land",
+            image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZndsajZxOTA2YzFyZTI2YXA1Y3FkZHo1amJvbmZrMzl5aDM0NmFkNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/4mqBypbaolvdCeoqLD/giphy.gif"
+        },
+        7: {
+            question: "What is their favorite flower?",
+            options: ["Rose", "Tulip", "Lily", "Sunflower"],
+            answer: "Rose",
+            image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2xmcHFyZ3BlN3BrZDUzYWRyZGZpc2d4ZnRubmE0ZjF5M2d6bjRieSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/6g9fN5IYV9Oc8/giphy.gif"
+        },
+        8: {
+            question: "What is their favorite type of chocolate?",
+            options: ["Milk Chocolate", "Dark Chocolate", "White Chocolate", "None"],
+            answer: "None",
+            image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXI4ZTdkNmJpeGs0aGgzbHJpeXlvaHJ0NWt0MDhkcnV5aXJ3c3V0ZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wTI6hkUqFn9OE/giphy.gif"
+        },
+        9: {
+            question: "What is their favorite romantic comedy?",
+            options: ["50 First Dates", "10 Things I Hate About You", "Crazy, Stupid, Love", "Any movie from Adam Sandler"],
+            answer: "Any movie from Adam Sandler",
+            image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjgyZnBsZG0wbHV0dHl6OXplZHNscnJmczBuMGRxNXdtdHU4NWs3MiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l52CGyJ4LZPa0/giphy.gif"
+        },
+        10: {
+            question: "Final Question: Will you be my valentine, Emily Reeves?",
+            options: ["Yes", "No", "Maybe", "I don't know"],
+            answer: "Yes",
+            image: "Untitled-2.png"
+        }
+    }
+    var answers = []
+    const frontScreen = document.getElementById('front')
+    
+    function startQuiz(){
+        frontScreen.style.display = "none"
+        const quizScreen = document.createElement("div")
+        quizScreen.id = "quiz"
+        document.body.appendChild(quizScreen)
+        displayQuestion(1)
+    }
+
+    function displayQuestion(num){
+        const quizScreen = document.getElementById('quiz')
+        quizScreen.style.textAlign = "center"
+        quizScreen.style.padding = "20px"
+        quizScreen.style.maxWidth = "600px"
+        quizScreen.style.margin = "50px auto"
+        quizScreen.style.background = "#ffdddd"
+        quizScreen.style.borderRadius = "15px"
+        quizScreen.innerHTML = ""
+        const question = questions[num]
+        const questionElement = document.createElement("h2")
+        questionElement.textContent = question.question
+        const imageElement = document.createElement("img")
+        if(question.image){
+            imageElement.src = question.image
+        }
+        quizScreen.appendChild(questionElement)
+        if(question.image){
+            const imageElement = document.createElement("img")
+            const breakElement = document.createElement("br")
+            imageElement.src = question.image
+            imageElement.style.maxWidth = "100%"
+            quizScreen.appendChild(imageElement)
+            quizScreen.appendChild(breakElement)
+        }
+        question.options.forEach(option => {
+            const optionButton = document.createElement("button")
+            optionButton.textContent = option
+            optionButton.style.background = 'pink'
+            optionButton.style.margin = '5px'
+            if(num == 10){
+                if(option == "Yes"){
+                    optionButton.style.background = "lightgreen"
+                } else {
+                    optionButton.style.background = "lightcoral"
+                    optionButton.style.color = "white"
+                    optionButton.style.cursor = "not-allowed"
+                }
+            }
+            optionButton.onclick = function(){
+                answers.push(option)
+                if(num == 10 && option != "Yes"){
+                    alert("Please choose 'Yes' to proceed with the quiz.")
+                    answers.pop()
+                    return
+                }
+                if(num < Object.keys(questions).length){
+                    displayQuestion(num + 1)
+                } else {
+                    displayResults()
+                }
+            }
+            quizScreen.appendChild(optionButton)
+        })
+    }
+    displayResults = function(){
+        const quizScreen = document.getElementById('quiz')
+        quizScreen.innerHTML = ""
+        let score = 0
+        for(let i = 1; i <= Object.keys(questions).length; i++){
+            if(answers[i-1] === questions[i].answer){
+                score++
+            }
+        }
+        const resultElement = document.createElement("h2")
+        resultElement.textContent = `Your love score is ${score} out of ${Object.keys(questions).length}!`
+        quizScreen.appendChild(resultElement)
+        loadAnswers()
+    }
+    function loadAnswers(){
+        const quizScreen = document.getElementById('quiz')
+        for(let i = 1; i <= Object.keys(questions).length; i++){
+            const question = questions[i]
+            const answerElement = document.createElement("p")
+            answerElement.innerHTML = `<h3>Q${i}: ${question.question} <br> Your answer: ${answers[i-1]} <br> Correct answer: ${question.answer}</h3>\n\n`
+            quizScreen.appendChild(answerElement)
+        }
+    }
+
+</script>
+</html>
+
+
+
+
+
+
